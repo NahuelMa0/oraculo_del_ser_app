@@ -167,3 +167,4 @@ for num in st.session_state.mazo[:10]:  # muestra solo 10 cartas visibles
         unsafe_allow_html=True
     )
 st.markdown("</div>", unsafe_allow_html=True)
+
