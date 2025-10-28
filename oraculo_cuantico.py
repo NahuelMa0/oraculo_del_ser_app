@@ -148,3 +148,4 @@ if st.session_state.carta_elegida:
     img = random.choice(imagenes_naturaleza)
     st.markdown(f"<div class='carta-activa' style=\"background-image: url('{img}')\">"
                 f"<p>{juegos[num]}</p></div>", unsafe_allow_html=True)
+
