@@ -1,4 +1,4 @@
-    import streamlit as st
+import streamlit as st
 import random
 
 # --- CONFIGURACIÓN ---
@@ -10,7 +10,6 @@ st.set_page_config(
 
 # --- CARTAS Y MENSAJES ---
 juegos = {}
-# Primeras 20 cartas con mensajes específicos
 mensajes_iniciales = [
     "🌅 El Testigo Silente — Observa sin reaccionar durante 5 minutos.",
     "🍃 Respiración del Alma — Siente cómo el universo te inhala y exhala.",
@@ -35,13 +34,12 @@ mensajes_iniciales = [
 ]
 
 for i in range(1, 21):
-    juegos[i] = mensajes_iniciales[i-1]
+    juegos[i] = mensajes_iniciales[i - 1]
 
-# Extender a 100 cartas con mensajes genéricos
 for i in range(21, 101):
     juegos[i] = f"✨ Carta {i}: Contempla el instante presente sin juicio ni expectativa."
 
-# --- IMÁGENES OPTIMIZADAS PARA CARTAS ---
+# --- IMÁGENES OPTIMIZADAS ---
 imagenes = [
     "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=200&h=400&fit=crop",
     "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=200&h=400&fit=crop",
@@ -55,7 +53,7 @@ imagenes = [
     "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=200&h=400&fit=crop"
 ]
 
-# --- ESTADO DE SESIÓN ---
+# --- SESIÓN ---
 if "baraja" not in st.session_state:
     st.session_state.baraja = list(range(1, 101))
     random.shuffle(st.session_state.baraja)
@@ -73,12 +71,11 @@ if st.button("🔁 Barajar y reiniciar"):
     random.shuffle(st.session_state.baraja)
     st.session_state.carta_elegida = None
 
-# --- MOSTRAR ABANICO DE CARTAS ---
-cols = st.columns(len(st.session_state.baraja[:12]))  # mostrar 12 cartas por fila para el abanico
+# --- MOSTRAR ABANICO ---
+cols = st.columns(12)
 for i, col in enumerate(cols):
     carta_num = st.session_state.baraja[i]
-    img = random.choice(imagenes)
-    if col.button("🂠", key=carta_num):  # el reverso de la carta
+    if col.button("🂠", key=f"carta_{carta_num}"):
         st.session_state.carta_elegida = carta_num
 
 # --- REVELAR CARTA ---
